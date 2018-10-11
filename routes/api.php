@@ -13,6 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+$api = app('Dingo\Api\Routing\Router');
+
+$api->version('v1', [
+    'namespace' => "App\Http\Controllers",
+    'limit'     => 10,
+    'expires'   => 1,
+], function ($api) {
+
+    $api->post('message','MessageController@store')
+    ->name('api.message.store');
+
+    $api->get('message','MessageController@index')
+    ->name('api.message.index');
+
+
+
 });
