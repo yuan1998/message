@@ -18,6 +18,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => "App\Http\Controllers",
+    'middleware' => ["serializer:array", 'bindings','cors'],
     'limit'     => 10,
     'expires'   => 1,
 ], function ($api) {

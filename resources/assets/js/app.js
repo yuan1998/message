@@ -5,18 +5,33 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+// vueとvue-routerの定義
+import Vue from 'vue'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import 'animate.css';
+import VueRouter from 'vue-router'
+import routes from './routes'
+import axios from 'axios'
 
-window.Vue = require('vue');
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+window.axios = axios;
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+
+// package を使う宣言
+Vue.use(VueRouter);
+Vue.use(ElementUI);
+
+
+// vue-routerのインスタンス化、オプションroutesでアクセスされるパスとその時に表示するComponentを指定
+const router = new VueRouter({
+    mode: 'history',
+    routes
+});
+
+
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router
 });

@@ -16,7 +16,8 @@ class Message extends Model
         'age',
         'ip',
         'info',
-        'other'
+        'other',
+        'type'
     ];
 
     protected $casts = [

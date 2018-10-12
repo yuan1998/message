@@ -22,6 +22,7 @@ class CreateMessagesTable extends Migration
             $table->string('project')->nullable();
             $table->string('age')->nullable();
             $table->string('ip')->nullable();
+            $table->string('type')->default('zx');
             $table->json('info')->nullable();
             $table->json('other')->nullable();
             $table->timestamps();
