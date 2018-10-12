@@ -125,6 +125,22 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @charset "UTF-8";
 
 /*!
@@ -8516,5 +8532,9 @@ button.close {
   display: inline-block;
   font-size: 18px;
   margin-right: 10px;
+}
+
+.el-table .success-row {
+  background: #c4ff00;
 }
 

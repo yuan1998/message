@@ -13,6 +13,7 @@
                                 :data="(tableMessage || [])"
                                 stripe
                                 style="width: 100%"
+                                :row-class-name="tableRowClassName"
                                 :default-sort = "{prop: 'create_at', order: 'descending'}"
                                 @row-click="rowClick"
                         >
@@ -96,12 +97,15 @@
             return {
                 title: 'test' ,
                 tableMessage : null,
+                lastData : null,
             }
         } ,
 
         mounted () {
-            this.messages();
-
+            this.lastData = (localStorage._last_date ? new Date(localStorage._last_date) : new Date()).getTime();
+            console.log(this.tableMessage);
+            if(!this.tableMessage)
+                this.messages();
         },
 
         methods :
@@ -110,13 +114,25 @@
             {
                  let a = await api.getMessage();
                  this.tableMessage = a.data.data;
+                 localStorage._last_date = this.tableMessage[ (this.tableMessage.length - 1) ].create_at;
                  console.log(this.tableMessage);
             },
 
             rowClick (row,column , cell , evt)
             {
-                console.log(row);
+                console.log(row.id);
                 this.$router.push({name:'info' , params :{id : row.id }});
+            },
+            tableRowClassName ({row , rowIndex})
+            {
+                let name = '';
+
+                if(this.lastData && (new Date(row.create_at).getTime() > this.lastData )) {
+                    name = 'success-row'
+                }
+
+                return name;
+
             }
         }
     }

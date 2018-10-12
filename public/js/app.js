@@ -62993,14 +62993,16 @@ var routes = [{
     component: __WEBPACK_IMPORTED_MODULE_0__components_index___default.a,
     name: 'home',
     meta: {
-        title: '首页'
+        title: '首页',
+        keepAlive: true // 需要被缓存
     }
 }, {
     path: '/info/:id',
     component: __WEBPACK_IMPORTED_MODULE_1__components_test___default.a,
     name: 'info',
     meta: {
-        title: '测试'
+        title: '测试',
+        keepAlive: false // 需要被缓存
     }
 }];
 
@@ -63166,6 +63168,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
 
 
 
@@ -63173,11 +63176,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     data: function data() {
         return {
             title: 'test',
-            tableMessage: null
+            tableMessage: null,
+            lastData: null
         };
     },
     mounted: function mounted() {
-        this.messages();
+        this.lastData = (localStorage._last_date ? new Date(localStorage._last_date) : new Date()).getTime();
+        console.log(this.tableMessage);
+        if (!this.tableMessage) this.messages();
     },
 
 
@@ -63196,9 +63202,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 a = _context.sent;
 
                                 this.tableMessage = a.data.data;
+                                localStorage._last_date = this.tableMessage[this.tableMessage.length - 1].create_at;
                                 console.log(this.tableMessage);
 
-                            case 5:
+                            case 6:
                             case 'end':
                                 return _context.stop();
                         }
@@ -63213,8 +63220,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             return messages;
         }(),
         rowClick: function rowClick(row, column, cell, evt) {
-            console.log(row);
+            console.log(row.id);
             this.$router.push({ name: 'info', params: { id: row.id } });
+        },
+        tableRowClassName: function tableRowClassName(_ref2) {
+            var row = _ref2.row,
+                rowIndex = _ref2.rowIndex;
+
+            var name = '';
+
+            if (this.lastData && new Date(row.create_at).getTime() > this.lastData) {
+                name = 'success-row';
+            }
+
+            return name;
         }
     }
 });
@@ -64052,6 +64071,7 @@ var render = function() {
                           attrs: {
                             data: _vm.tableMessage || [],
                             stripe: "",
+                            "row-class-name": _vm.tableRowClassName,
                             "default-sort": {
                               prop: "create_at",
                               order: "descending"
@@ -64368,11 +64388,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 res = _context.sent;
 
                                 this.data = res.data;
-                                console.log(this.data);
                                 this.title = this.data.name + "" + this.data.phone;
                                 this.center = [this.data.info.lon, this.data.info.lat];
 
-                            case 7:
+                            case 6:
                             case 'end':
                                 return _context.stop();
                         }
@@ -64422,19 +64441,37 @@ var render = function() {
                   ]
                 },
                 [
-                  _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-                    _c("a", { attrs: { href: "javascript:history.go(-1)" } }, [
-                      _c("span", [_c("i", { staticClass: "el-icon-back" })]),
-                      _vm._v(" "),
-                      _c("span", [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(_vm.title) +
-                            "\n                        "
-                        )
-                      ])
-                    ])
-                  ]),
+                  _c(
+                    "div",
+                    { attrs: { slot: "header" }, slot: "header" },
+                    [
+                      _c(
+                        "el-button",
+                        {
+                          attrs: { type: "text" },
+                          on: {
+                            click: function() {
+                              _vm.$router.go(-1)
+                            }
+                          }
+                        },
+                        [
+                          _c("span", [
+                            _c("i", { staticClass: "el-icon-back" })
+                          ]),
+                          _vm._v(" "),
+                          _c("span", [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(_vm.title) +
+                                "\n                        "
+                            )
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
                   _vm.data !== null
                     ? _c("div", [

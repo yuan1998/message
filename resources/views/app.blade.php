@@ -22,9 +22,16 @@
                         enter-active-class="animated fadeInLeft"
                         leave-active-class="animated fadeOutLeft"
             >
-                <router-view>
+                <keep-alive>
+                    <router-view v-if="$route.meta.keepAlive"></router-view>
+                </keep-alive>
+            </transition>
+            <transition name="custom-classes-transition"
+                        enter-active-class="animated fadeInLeft"
+                        leave-active-class="animated fadeOutLeft"
+            >
+                <router-view v-if="!$route.meta.keepAlive"></router-view>
 
-                </router-view>
             </transition>
         </div>
 

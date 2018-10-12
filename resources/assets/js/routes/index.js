@@ -7,7 +7,8 @@ const routes = [
         component: Home,
         name : 'home',
         meta : {
-            title : '首页'
+            title : '首页',
+            keepAlive: true // 需要被缓存
         }
     },
     {
@@ -15,7 +16,8 @@ const routes = [
         component: Test,
         name : 'info',
         meta : {
-            title : '测试'
+            title : '测试',
+            keepAlive: false // 需要被缓存
         }
     },
 

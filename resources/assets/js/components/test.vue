@@ -4,14 +4,14 @@
             <el-col :span="24" :md="{span:20,offset:2}">
                 <el-card v-loading="data === null">
                     <div class="" slot="header">
-                        <a href="javascript:history.go(-1)">
+                        <el-button type="text" @click="()=>{$router.go(-1)}">
                             <span>
                                 <i class="el-icon-back"></i>
                             </span>
                             <span>
                                 {{ title }}
                             </span>
-                        </a>
+                        </el-button>
                     </div>
                     <div v-if="data !== null">
                         <div class="y-map-container">
@@ -122,7 +122,6 @@
             {
                 let res = await api.message(id);
                 this.data = res.data;
-                console.log(this.data);
                 this.title = this.data.name + "" +this.data.phone;
                 this.center = [this.data.info.lon , this.data.info.lat];
             }
