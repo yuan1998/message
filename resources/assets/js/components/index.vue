@@ -1,20 +1,84 @@
 <template>
-    <div class="page-container page-index">
+    <div class="page-container page-index" >
         <el-row justify="center">
             <el-col :span="24" :md="{span:20,offset:2}">
-                <el-card>
+                <el-card v-loading="tableMessage === null">
                     <div class="" slot="header">
-                                <span>
-                                    {{ $route.meta.title }}
-                                </span>
+                        <span class="text-monospace" style="font-size: 22px;">
+                            壹頁單章
+                        </span>
                     </div>
                     <div class="">
+                        <el-table
+                                :data="(tableMessage || [])"
+                                stripe
+                                style="width: 100%"
+                                :default-sort = "{prop: 'create_at', order: 'descending'}"
+                                @row-click="rowClick"
+                        >
+                            <el-table-column
+                                    fixed
+                                    sortable
+                                    prop="create_at"
+                                    label="日期"
+                                    width="180"
+                            >
+                            </el-table-column>
+                            <el-table-column
+                                    prop="name"
+                                    label="姓名"
+                                    width="180"
+                            >
+                            </el-table-column>
+                            <el-table-column
+                                    prop="phone"
+                                    label="电话"
+                                    width="180"
+                            >
+                            </el-table-column>
+                            <el-table-column
+                                    prop="gender"
+                                    label="性别"
+                                    width="180"
+                            >
+                            </el-table-column>
+                            <el-table-column
+                                    prop="age"
+                                    label="年龄"
+                                    width="180"
+                            >
+                            </el-table-column>
+                            <el-table-column
+                                    prop="project"
+                                    label="项目"
+                                    width="180"
+                            >
+                            </el-table-column>
 
-                        <div class="">
-                            <router-link to="test">
-                                Go Test.
-                            </router-link>
-                        </div>
+                            <el-table-column
+                                    prop="info"
+                                    label="地区"
+                                    width="180"
+                            >
+                                <template slot-scope="scope">
+                                    <span style="margin-left: 10px">{{ scope.row.info.country + ' ' + scope.row.info.state_name + ' ' + scope.row.info.city  }}</span>
+                                </template>
+                            </el-table-column>
+                            <el-table-column
+                                    prop="type"
+                                    label="类型"
+                                    width="180"
+                            >
+                            </el-table-column>
+
+
+                            <el-table-column
+                                    prop="comment"
+                                    label="留言"
+                                    width="180"
+                            >
+                            </el-table-column>
+                        </el-table>
                     </div>
                 </el-card>
             </el-col>
@@ -31,21 +95,28 @@
         data () {
             return {
                 title: 'test' ,
+                tableMessage : null,
             }
         } ,
 
         mounted () {
-            console.log(this.$router);
             this.messages();
 
         },
 
         methods :
         {
-             async messages ()
+            async messages ()
             {
                  let a = await api.getMessage();
-                 console.log(a);
+                 this.tableMessage = a.data.data;
+                 console.log(this.tableMessage);
+            },
+
+            rowClick (row,column , cell , evt)
+            {
+                console.log(row);
+                this.$router.push({name:'info' , params :{id : row.id }});
             }
         }
     }

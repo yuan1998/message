@@ -18,17 +18,24 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
     'namespace' => "App\Http\Controllers",
-    'middleware' => ["serializer:array", 'bindings','cors'],
-    'limit'     => 10,
-    'expires'   => 1,
+    'middleware' => ["serializer:array", 'bindings'],
+
 ], function ($api) {
 
-    $api->post('message','MessageController@store')
-    ->name('api.message.store');
+    $api->group([
+        'middleware' => ['cors'],
+        'limit'     => 10,
+        'expires'   => 1,
+    ],function ($api) {
+        $api->post('message','MessageController@store')
+        ->name('api.message.store');
+    });
 
     $api->get('message','MessageController@index')
     ->name('api.message.index');
 
+    $api->get('message/{message}','MessageController@show')
+    ->name('api.message.show');
 
 
 });

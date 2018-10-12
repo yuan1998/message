@@ -11,9 +11,9 @@ const routes = [
         }
     },
     {
-        path: '/test' ,
+        path: '/info/:id' ,
         component: Test,
-        name : 'test',
+        name : 'info',
         meta : {
             title : '测试'
         }

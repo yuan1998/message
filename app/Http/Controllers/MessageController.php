@@ -36,4 +36,12 @@ class MessageController extends Controller
         return $this->response->collection($message->all() , new MessageTransformer());
     }
 
+
+    public function show ( Message $message)
+    {
+
+        return $this->response->item($message, new MessageTransformer());
+
+    }
+
 }

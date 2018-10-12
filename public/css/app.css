@@ -54,6 +54,77 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @charset "UTF-8";
 
 /*!
@@ -8411,5 +8482,39 @@ button.close {
   top: 0;
   left: 0;
   right: 0;
+}
+
+.y-map-container {
+  display: block;
+}
+
+.y-map-container .y-map-wrap {
+  padding-top: 50%;
+  background-color: #000;
+  position: relative;
+}
+
+.y-map-container .y-map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.y-info-container {
+  padding-top: 20px;
+}
+
+.y-info-container .text-monospace {
+  font-size: 15px;
+  vertical-align: baseline;
+}
+
+.y-info-container .text-monospace span {
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 10px;
 }
 

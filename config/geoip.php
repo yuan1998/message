@@ -141,12 +141,12 @@ return [
     */
 
     'default_location' => [
-        'ip' => '127.0.0.0',
+        'ip' => "1.85.50.118",
         'iso_code' => 'CN',
-        'country' => 'Chine',
-        'city' => 'Xi\'An',
+        'country' => '中国',
+        'city' => '西安',
         'state' => 'SN',
-        'state_name' => 'ShaanXi',
+        'state_name' => '陕西',
         'postal_code' => '',
         'lat' => 34.2583,
         'lon' => 108.9286,

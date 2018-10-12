@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "animate.css": "^3.7.0",
-    "element-ui": "^2.4.8"
+    "element-ui": "^2.4.8",
+    "vue-amap": "^0.5.8"
   }
 }

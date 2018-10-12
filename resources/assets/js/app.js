@@ -13,14 +13,24 @@ import 'animate.css';
 import VueRouter from 'vue-router'
 import routes from './routes'
 import axios from 'axios'
-
+import VueAMap from 'vue-amap';
 
 window.axios = axios;
 
 
 // package を使う宣言
+Vue.use(VueAMap);
 Vue.use(VueRouter);
 Vue.use(ElementUI);
+
+
+
+VueAMap.initAMapApiLoader({
+    key: '18466ae6bc3fb6e154cae817f57dc6ff',
+    plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
+    // 默认高德 sdk 版本为 1.4.4
+    v: '1.4.4'
+});
 
 
 // vue-routerのインスタンス化、オプションroutesでアクセスされるパスとその時に表示するComponentを指定

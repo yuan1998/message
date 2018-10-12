@@ -7,7 +7,13 @@ const getMessage = async (options) => {
     return res;
 };
 
+const message = async (id) => {
+    let res = await axios.get(url + 'message/' + id);
+    return res;
+};
+
 
 export default {
     getMessage,
+    message
 }
