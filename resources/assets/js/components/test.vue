@@ -80,6 +80,16 @@
                                         {{data.project}}
                                     </p>
                                 </el-col>
+                                <el-col :sm="24">
+                                    <div class="text-monospace">
+                                        <span>
+                                            留言
+                                        </span>
+                                        <p style="text-indent: 20px;padding-top: 8px;">
+                                            {{data.comment}}
+                                        </p>
+                                    </div>
+                                </el-col>
 
 
 
@@ -106,7 +116,7 @@
                 data : null,
                 center : null,
                 zooms: 12,
-                radius: 4800,
+                radius: 5200,
                 fillOpacity: 0.5,
             }
         },

@@ -64425,6 +64425,16 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -64435,7 +64445,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             data: null,
             center: null,
             zooms: 12,
-            radius: 4800,
+            radius: 5200,
             fillOpacity: 0.5
         };
     },
@@ -64677,6 +64687,33 @@ var render = function() {
                                       "\n                                    " +
                                         _vm._s(_vm.data.project) +
                                         "\n                                "
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("el-col", { attrs: { sm: 24 } }, [
+                                  _c("div", { staticClass: "text-monospace" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        "\n                                        留言\n                                    "
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      {
+                                        staticStyle: {
+                                          "text-indent": "20px",
+                                          "padding-top": "8px"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                                        " +
+                                            _vm._s(_vm.data.comment) +
+                                            "\n                                    "
+                                        )
+                                      ]
                                     )
                                   ])
                                 ])
