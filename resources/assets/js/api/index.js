@@ -13,7 +13,15 @@ const message = async (id) => {
 };
 
 
+const checkNew = async () => {
+  let at = localStorage._last_date;
+  let res = await axios.post(url + 'message/check',{at});
+
+  return res;
+};
+
 export default {
     getMessage,
-    message
+    message,
+    checkNew
 }

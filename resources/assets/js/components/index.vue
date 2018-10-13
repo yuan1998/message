@@ -1,5 +1,5 @@
 <template>
-    <div class="page-container page-index" >
+    <div class="page-container page-index">
         <el-row justify="center">
             <el-col :span="24" :md="{span:20,offset:2}">
                 <el-card v-loading="tableMessage === null">
@@ -14,7 +14,7 @@
                                 stripe
                                 style="width: 100%"
                                 :row-class-name="tableRowClassName"
-                                :default-sort = "{prop: 'create_at', order: 'descending'}"
+                                :default-sort="{prop: 'create_at', order: 'descending'}"
                                 @row-click="rowClick"
                         >
                             <el-table-column
@@ -96,45 +96,61 @@
         data () {
             return {
                 title: 'test' ,
-                tableMessage : null,
-                lastData : null,
+                tableMessage: null ,
+                lastData: null ,
+                interval: null ,
             }
         } ,
 
         mounted () {
             this.lastData = (localStorage._last_date ? new Date(localStorage._last_date) : new Date()).getTime();
             console.log(this.tableMessage);
-            if(!this.tableMessage)
+            if (!this.tableMessage)
                 this.messages();
-        },
+        } ,
 
-        methods :
-        {
-            async messages ()
+        methods:
             {
-                 let a = await api.getMessage();
-                 this.tableMessage = a.data.data;
-                 localStorage._last_date = this.tableMessage[ (this.tableMessage.length - 1) ].create_at;
-                 console.log(this.tableMessage);
-            },
+                async messages () {
+                    let a = await api.getMessage();
+                    this.tableMessage = a.data.data;
+                    localStorage._last_date = this.tableMessage[(this.tableMessage.length - 1)].create_at;
+                    console.log(this.tableMessage);
 
-            rowClick (row,column , cell , evt)
-            {
-                console.log(row.id);
-                this.$router.push({name:'info' , params :{id : row.id }});
-            },
-            tableRowClassName ({row , rowIndex})
-            {
-                let name = '';
+                    setInterval(() => {
+                        this.checkHasNewMessage();
+                    } , 60000)
 
-                if(this.lastData && (new Date(row.create_at).getTime() > this.lastData )) {
-                    name = 'success-row'
+                } ,
+
+                async checkHasNewMessage () {
+                    let res = await api.checkNew();
+
+
+                    if(res.status == 201) {
+                        this.$message({
+                            duration: 0 ,
+                            message: '有新的留言.'
+                        });
+                        clearInterval(this.interval);
+                    }
+                    console.log(res.status);
+                } ,
+
+                rowClick (row , column , cell , evt) {
+                    this.$router.push({name: 'info' , params: {id: row.id}});
+                } ,
+                tableRowClassName ({row , rowIndex}) {
+                    let name = '';
+
+                    if (this.lastData && (new Date(row.create_at).getTime() > this.lastData)) {
+                        name = 'success-row'
+                    }
+
+                    return name;
+
                 }
-
-                return name;
-
             }
-        }
     }
 
 </script>

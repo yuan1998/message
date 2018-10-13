@@ -16136,9 +16136,38 @@ var message = function () {
     };
 }();
 
+var checkNew = function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+        var at, res;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
+                    case 0:
+                        at = localStorage._last_date;
+                        _context3.next = 3;
+                        return axios.post(url + 'message/check', { at: at });
+
+                    case 3:
+                        res = _context3.sent;
+                        return _context3.abrupt('return', res);
+
+                    case 5:
+                    case 'end':
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, _this);
+    }));
+
+    return function checkNew() {
+        return _ref3.apply(this, arguments);
+    };
+}();
+
 /* harmony default export */ __webpack_exports__["a"] = ({
     getMessage: getMessage,
-    message: message
+    message: message,
+    checkNew: checkNew
 });
 
 /***/ }),
@@ -63177,7 +63206,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         return {
             title: 'test',
             tableMessage: null,
-            lastData: null
+            lastData: null,
+            interval: null
         };
     },
     mounted: function mounted() {
@@ -63190,6 +63220,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
     methods: {
         messages: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+                var _this = this;
+
                 var a;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
@@ -63205,7 +63237,11 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 localStorage._last_date = this.tableMessage[this.tableMessage.length - 1].create_at;
                                 console.log(this.tableMessage);
 
-                            case 6:
+                                setInterval(function () {
+                                    _this.checkHasNewMessage();
+                                }, 60000);
+
+                            case 7:
                             case 'end':
                                 return _context.stop();
                         }
@@ -63219,13 +63255,49 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             return messages;
         }(),
+        checkHasNewMessage: function () {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
+                var res;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.next = 2;
+                                return __WEBPACK_IMPORTED_MODULE_1__api__["a" /* default */].checkNew();
+
+                            case 2:
+                                res = _context2.sent;
+
+
+                                if (res.status == 201) {
+                                    this.$message({
+                                        duration: 0,
+                                        message: '有新的留言.'
+                                    });
+                                    clearInterval(this.interval);
+                                }
+                                console.log(res.status);
+
+                            case 5:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function checkHasNewMessage() {
+                return _ref2.apply(this, arguments);
+            }
+
+            return checkHasNewMessage;
+        }(),
         rowClick: function rowClick(row, column, cell, evt) {
-            console.log(row.id);
             this.$router.push({ name: 'info', params: { id: row.id } });
         },
-        tableRowClassName: function tableRowClassName(_ref2) {
-            var row = _ref2.row,
-                rowIndex = _ref2.rowIndex;
+        tableRowClassName: function tableRowClassName(_ref3) {
+            var row = _ref3.row,
+                rowIndex = _ref3.rowIndex;
 
             var name = '';
 
