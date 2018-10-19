@@ -18,7 +18,7 @@ class MessageController extends Controller
 
         $data['info'] = geoip($data['ip'])->toArray();
 
-        $data['url'] = $request->fullUrl();
+        $data['url'] = $request->server('HTTP_REFERER');
 
         $message->fill($data);
 
