@@ -19,6 +19,7 @@ class MessageTransformer extends TransformerAbstract
             'gender'     => $message->gender == 1 ? '男' : '女',
             'project'    => $message->project,
             'ip'         => $message->ip,
+            'url'         => $message->url,
             'age'         => $message->age,
             'info'       => $message->info,
             'type'       => $message->type == 'zx' ? '整形' : '口腔',

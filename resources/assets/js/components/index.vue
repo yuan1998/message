@@ -71,6 +71,12 @@
                                     width="180"
                             >
                             </el-table-column>
+                            <el-table-column
+                                    prop="url"
+                                    label="来源链接"
+                            >
+                            </el-table-column>
+
 
 
                             <el-table-column
@@ -125,8 +131,6 @@
 
                 async checkHasNewMessage () {
                     let res = await api.checkNew();
-
-
                     if(res.status == 201) {
                         this.$message({
                             duration: 0 ,

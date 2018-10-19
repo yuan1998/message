@@ -83,6 +83,14 @@
                                 <el-col :sm="24">
                                     <div class="text-monospace">
                                         <span>
+                                            来源链接
+                                        </span>
+                                            {{data.url}}
+                                    </div>
+                                </el-col>
+                                <el-col :sm="24">
+                                    <div class="text-monospace">
+                                        <span>
                                             留言
                                         </span>
                                         <p style="text-indent: 20px;padding-top: 8px;">
@@ -90,6 +98,7 @@
                                         </p>
                                     </div>
                                 </el-col>
+
 
 
 

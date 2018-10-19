@@ -63198,6 +63198,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63267,7 +63273,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                             case 2:
                                 res = _context2.sent;
-
 
                                 if (res.status == 201) {
                                     this.$message({
@@ -64233,6 +64238,10 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("el-table-column", {
+                            attrs: { prop: "url", label: "来源链接" }
+                          }),
+                          _vm._v(" "),
+                          _c("el-table-column", {
                             attrs: {
                               prop: "comment",
                               label: "留言",
@@ -64327,6 +64336,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -64686,6 +64704,21 @@ var render = function() {
                                     _vm._v(
                                       "\n                                    " +
                                         _vm._s(_vm.data.project) +
+                                        "\n                                "
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("el-col", { attrs: { sm: 24 } }, [
+                                  _c("div", { staticClass: "text-monospace" }, [
+                                    _c("span", [
+                                      _vm._v(
+                                        "\n                                        来源链接\n                                    "
+                                      )
+                                    ]),
+                                    _vm._v(
+                                      "\n                                        " +
+                                        _vm._s(_vm.data.url) +
                                         "\n                                "
                                     )
                                   ])

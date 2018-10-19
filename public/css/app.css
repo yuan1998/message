@@ -157,6 +157,10 @@
 
 
 
+
+
+
+
 @charset "UTF-8";
 
 /*!
@@ -8550,6 +8554,7 @@ button.close {
   margin-right: 10px;
 }
 
+.el-table .success-row > td,
 .el-table .success-row {
   background: #c4ff00;
 }

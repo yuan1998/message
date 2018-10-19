@@ -18,6 +18,8 @@ class MessageController extends Controller
 
         $data['info'] = geoip($data['ip'])->toArray();
 
+        $data['url'] = $request->fullUrl();
+
         $message->fill($data);
 
         $message->save();

@@ -17,6 +17,7 @@ class Message extends Model
         'ip',
         'info',
         'other',
+        'url',
         'type'
     ];
 
