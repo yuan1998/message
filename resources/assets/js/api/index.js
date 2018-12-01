@@ -1,5 +1,4 @@
-
-const url = "http://message.test/api/";
+const url = process.env.MIX_API_URL;
 
 const getMessage = async (options) => {
     let res = await axios.get(url + 'message');
