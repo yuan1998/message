@@ -20,40 +20,52 @@
                             <el-table-column
                                     fixed
                                     sortable
-                                    prop="create_at"
                                     label="日期"
                                     width="180"
                             >
+                                <span slot-scope="scope">
+                                    {{ scope.row.create_at || '-' }}
+                                </span>
                             </el-table-column>
                             <el-table-column
-                                    prop="name"
                                     label="姓名"
                                     width="180"
                             >
+                                <span slot-scope="scope">
+                                    {{ scope.row.name || '-' }}
+                                </span>
                             </el-table-column>
                             <el-table-column
-                                    prop="phone"
                                     label="电话"
                                     width="180"
                             >
+                                <span slot-scope="scope">
+                                    {{ scope.row.phone || '-' }}
+                                </span>
                             </el-table-column>
                             <el-table-column
-                                    prop="gender"
                                     label="性别"
                                     width="180"
                             >
+                                <span slot-scope="scope">
+                                    {{ scope.row.gender || '-' }}
+                                </span>
                             </el-table-column>
                             <el-table-column
-                                    prop="age"
                                     label="年龄"
                                     width="180"
                             >
+                                <span slot-scope="scope">
+                                    {{ scope.row.age || '-' }}
+                                </span>
                             </el-table-column>
                             <el-table-column
-                                    prop="project"
                                     label="项目"
                                     width="180"
                             >
+                                <span slot-scope="scope">
+                                    {{ scope.row.project || '-' }}
+                                </span>
                             </el-table-column>
 
                             <el-table-column
@@ -66,23 +78,28 @@
                                 </template>
                             </el-table-column>
                             <el-table-column
-                                    prop="type"
                                     label="类型"
                                     width="180"
                             >
+                                <span slot-scope="scope">
+                                    {{ scope.row.type || '-' }}
+                                </span>
                             </el-table-column>
                             <el-table-column
-                                    prop="url"
-                                    label="来源链接"
-                            >
-                            </el-table-column>
-
-
-                            <el-table-column
-                                    prop="comment"
                                     label="留言"
                                     width="180"
                             >
+                                <span slot-scope="scope">
+                                    {{ scope.row.comment || '-' }}
+                                </span>
+                            </el-table-column>
+                            <el-table-column
+                                    label="来源链接"
+                                    width="450"
+                            >
+                                <span slot-scope="scope">
+                                    {{ scope.row.url || '-' }}
+                                </span>
                             </el-table-column>
                         </el-table>
                     </div>
