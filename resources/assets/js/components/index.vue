@@ -5,7 +5,7 @@
                 <el-card v-loading="tableMessage === null">
                     <div class="" slot="header">
                         <span class="text-monospace" style="font-size: 22px;">
-                            壹頁單章
+                            什么鬼
                         </span>
                     </div>
                     <div class="">
@@ -78,7 +78,6 @@
                             </el-table-column>
 
 
-
                             <el-table-column
                                     prop="comment"
                                     label="留言"
@@ -99,62 +98,61 @@
     import api from "../api"
 
     export default {
-        data () {
+        data() {
             return {
-                title: 'test' ,
-                tableMessage: null ,
-                lastData: null ,
-                interval: null ,
+                title       : 'test',
+                tableMessage: null,
+                lastData    : null,
+                interval    : null,
             }
-        } ,
+        },
 
-        mounted () {
+        mounted() {
             this.lastData = (localStorage._last_date ? new Date(localStorage._last_date) : new Date()).getTime();
             console.log(this.tableMessage);
             if (!this.tableMessage)
                 this.messages();
-        } ,
+        },
 
-        methods:
-            {
-                async messages () {
-                    let a = await api.getMessage();
-                    this.tableMessage = a.data.data;
-                    localStorage._last_date = this.tableMessage[(this.tableMessage.length - 1)].create_at;
-                    console.log(this.tableMessage);
+        methods: {
+            async messages() {
+                let a = await api.getMessage();
 
-                    setInterval(() => {
-                        this.checkHasNewMessage();
-                    } , 60000)
+                this.tableMessage       = a.data.data;
+                localStorage._last_date = this.tableMessage[ (this.tableMessage.length - 1) ].create_at;
 
-                } ,
+                setInterval(() => {
+                    this.checkHasNewMessage();
+                }, 10000)
 
-                async checkHasNewMessage () {
-                    let res = await api.checkNew();
-                    if(res.status == 201) {
-                        this.$message({
-                            duration: 0 ,
-                            message: '有新的留言.'
-                        });
-                        clearInterval(this.interval);
-                    }
-                    console.log(res.status);
-                } ,
+            },
 
-                rowClick (row , column , cell , evt) {
-                    this.$router.push({name: 'info' , params: {id: row.id}});
-                } ,
-                tableRowClassName ({row , rowIndex}) {
-                    let name = '';
-
-                    if (this.lastData && (new Date(row.create_at).getTime() > this.lastData)) {
-                        name = 'success-row'
-                    }
-
-                    return name;
-
+            async checkHasNewMessage() {
+                let res = await api.checkNew();
+                if (res.status == 201) {
+                    this.$notify({
+                        duration : 0,
+                        message  : '有新的留言,请刷新.',
+                        title    : '提示',
+                        type     : 'info',
+                        showClose: false,
+                    });
+                    clearInterval(this.interval);
                 }
+            },
+            rowClick(row, column, cell, evt) {
+                this.$router.push({ name: 'info', params: { id: row.id } });
+            },
+            tableRowClassName({ row, rowIndex }) {
+                let name = '';
+
+                if (this.lastData && (new Date(row.create_at).getTime() > this.lastData)) {
+                    name = 'success-row'
+                }
+
+                return name;
             }
+        }
     }
 
 </script>
