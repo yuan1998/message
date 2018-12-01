@@ -121,7 +121,7 @@
                 this.tableMessage       = a.data.data;
                 localStorage._last_date = this.tableMessage[ (this.tableMessage.length - 1) ].create_at;
 
-                setInterval(() => {
+                this.interval = setInterval(() => {
                     this.checkHasNewMessage();
                 }, 10000)
 
@@ -137,7 +137,7 @@
                         type     : 'info',
                         showClose: false,
                     });
-                    clearInterval(this.interval);
+                    this.interval && clearInterval(this.interval);
                 }
             },
             rowClick(row, column, cell, evt) {
