@@ -17,13 +17,10 @@ import VueAMap from 'vue-amap';
 
 window.axios = axios;
 
-
 // package を使う宣言
 Vue.use(VueAMap);
 Vue.use(VueRouter);
 Vue.use(ElementUI);
-
-
 
 VueAMap.initAMapApiLoader({
     key: '18466ae6bc3fb6e154cae817f57dc6ff',
@@ -38,8 +35,6 @@ const router = new VueRouter({
     mode: 'history',
     routes
 });
-
-
 
 const app = new Vue({
     el: '#app',

@@ -1,7 +1,22 @@
 const url = process.env.MIX_API_URL;
 
-const getMessage = async (options) => {
-    let res = await axios.get(url + 'message');
+const parseParamater = (obj) => {
+    let str = '';
+
+    for(let key in obj) {
+        let val = obj[key];
+        if (!val)
+            continue;
+
+        str += `${key}=${obj[key]}&`;
+    }
+
+    return "?" + str;
+};
+
+const getMessage = async (param) => {
+
+    let res = await axios.get(url + 'message' + ( param ? parseParamater(param) : '' ));
 
     return res;
 };
