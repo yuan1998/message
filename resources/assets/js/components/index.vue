@@ -18,7 +18,6 @@
                         <div class="">
                             <el-table
                                     :data="tableMessage"
-                                    stripe
                                     style="width: 100%"
                                     :row-class-name="tableRowClassName"
                                     @row-click="rowClick"
